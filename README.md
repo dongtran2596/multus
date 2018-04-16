@@ -1,7 +1,10 @@
 # multus
-1.  kubectl create -f ./crdnetwork.yaml
-2.  customresourcedefinition "network.kubernetes.com" created
-3.  kubectl create -f flannel-network.yaml
-4.  network "flannel-networkobj" created
-5.  kubectl create -f pod-multi-network.yaml
-6.  pod "multus-multi-net-poc" created
+1.  git clone https://github.com/dongtran2596/multus/
+2.  cd multus
+1.  Tạo một CustomResourceDefinition: 
+kubectl create -f crdnetwork.yaml
+3.  Tạo các Network:
+kubectl create -f flannel-network.yaml sriov-network.yaml sriov-vlanid-l2enable-network.yaml 
+6.  Tạo một Pod có nhiều giao diện mạng:
+kubectl create -f pod-multi-network.yaml
+
