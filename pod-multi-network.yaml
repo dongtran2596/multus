@@ -5,8 +5,7 @@ metadata:
   annotations:
     networks: '[  
         { "name": "flannel-conf" },
-        { "name": "sriov-conf"},
-        { "name": "sriov-vlanid-l2enable-conf" } 
+        { "name": "macvlan-conf"},        
     ]'
 spec:  # specification of the pod's contents
   containers:
