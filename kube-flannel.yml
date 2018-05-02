@@ -46,11 +46,11 @@ metadata:
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: kube-flannel-cfg
+  name: kube-multus-cfg
   namespace: kube-system
   labels:
     tier: node
-    app: flannel
+    app: multus
 data:
   cni-conf.json: |
     {
@@ -63,13 +63,13 @@ data:
           "mode": "bridge",
           "ipam": {
             "type": "host-local",
-            "subnet": "192.168.122.0/24",
-            "rangeStart": "192.168.122.200",
-            "rangeEnd": "192.168.122.216",
+            "subnet": "{{ multus_ipam_subnet }}",
+            "rangeStart": "{{ multus_ipam_rangeStart }}",
+            "rangeEnd": "{{ multus_ipam_rangeEnd }}",
             "routes": [
               { "dst": "0.0.0.0/0" }
             ],
-            "gateway": "192.168.122.1"
+            "gateway": "{{ multus_ipam_gateway }}"
          }
         },
         {
@@ -83,7 +83,7 @@ data:
     }
   net-conf.json: |
     {
-      "Network": "10.244.0.0/16",
+      "Network": "{{ pod_network_cidr }}/16",
       "Backend": {
         "Type": "vxlan"
       }
@@ -92,17 +92,17 @@ data:
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
-  name: kube-flannel-ds
+  name: kube-multus-ds
   namespace: kube-system
   labels:
     tier: node
-    app: flannel
+    app: multus
 spec:
   template:
     metadata:
       labels:
         tier: node
-        app: flannel
+        app: multus
     spec:
       hostNetwork: true
       nodeSelector:
@@ -120,11 +120,11 @@ spec:
         args:
         - -f
         - /etc/kube-flannel/cni-conf.json
-        - /etc/cni/net.d/10-flannel.conflist
+        - /etc/cni/net.d/10-flannel.conf
         volumeMounts:
         - name: cni
           mountPath: /etc/cni/net.d
-        - name: flannel-cfg
+        - name: multus-cfg
           mountPath: /etc/kube-flannel/
       containers:
       - name: kube-flannel
@@ -155,7 +155,7 @@ spec:
         volumeMounts:
         - name: run
           mountPath: /run
-        - name: flannel-cfg
+        - name: multus-cfg
           mountPath: /etc/kube-flannel/
       volumes:
         - name: run
@@ -164,6 +164,6 @@ spec:
         - name: cni
           hostPath:
             path: /etc/cni/net.d
-        - name: flannel-cfg
+        - name: multus-cfg
           configMap:
-            name: kube-flannel-cfg
+            name: kube-multus-cfg
