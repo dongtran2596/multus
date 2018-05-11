@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
-kind: Deployment
+kind: Pod
 metadata:
-  name: iptables-deployment
+  name: iptables-pod
 spec:
   replicas: 2
   template:
@@ -11,4 +11,4 @@ spec:
     spec:
       containers:
       - name: iptables
-        image: ubuntu:16.04
+        image: vimagick/iptables:latest
