@@ -11,4 +11,4 @@ spec:
     spec:
       containers:
       - name: iptables
-        image: vimagick/iptables:latest
+        image: biarca/iptables:latest
