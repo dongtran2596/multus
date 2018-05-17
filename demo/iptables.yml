@@ -9,3 +9,16 @@ spec:
   containers:
     - name: iptables
       image: vimagick/iptables:latest
+      securityContext:
+        capabilities:
+          add:
+            - NET_ADMIN
+      env:
+      - name: TCP_PORTS
+        value: "80,443"
+      - name: UDP_PORTS
+        value: "53"
+      - name: RATE
+        value: "4mbit"
+      - name: BURST
+        value: "4kb"
