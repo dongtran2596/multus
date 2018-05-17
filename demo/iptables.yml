@@ -1,24 +1,28 @@
 
-apiVersion: v1
-kind: Pod
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
   name: iptables
-  labels:
-    name: iptables
 spec:
-  containers:
-    - name: iptables
-      image: vimagick/iptables:latest
-      securityContext:
-        capabilities:
-          add:
-            - NET_ADMIN
-      env:
-      - name: TCP_PORTS
-        value: "80,443"
-      - name: UDP_PORTS
-        value: "53"
-      - name: RATE
-        value: "4mbit"
-      - name: BURST
-        value: "4kb"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: iptables
+    spec:
+      containers:
+        - name: iptables
+          image: vimagick/iptables:latest
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          env:
+          - name: TCP_PORTS
+            value: "80,443"
+          - name: UDP_PORTS
+            value: "53"
+          - name: RATE
+            value: "4mbit"
+          - name: BURST
+            value: "4kb"
