@@ -2,7 +2,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: iptables
+  name: iptable-app
 spec:
   replicas: 1
   template:
@@ -13,10 +13,12 @@ spec:
       containers:
         - name: iptables
           image: vimagick/iptables:latest
+          imagePullPolicy: Always
           securityContext:
             capabilities:
               add:
                 - NET_ADMIN
+                - NET_RAW
           env:
           - name: TCP_PORTS
             value: "80,443"
