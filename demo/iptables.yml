@@ -13,6 +13,8 @@ spec:
       containers:
         - name: iptables
           image: vimagick/iptables:latest
+          port:
+          - containerPort: 80
           imagePullPolicy: Always
           securityContext:
             capabilities:
