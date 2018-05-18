@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: iptables-service
   labels:
-    run: iptables
+    name: iptables
 spec:
   type: NodePort
   selector:
-    run: iptables
+    name: iptables
   ports:
     - protocol: TCP
       port: 80
