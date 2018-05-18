@@ -1,15 +1,15 @@
 #!/bin/sh
 create(){
 	kubectl create -f flannel-rbac.yml
-	#kubectl create -f multus.yml
-	kubectl create -f flannel.yml	
+	kubectl create -f multus2.yml
+	#kubectl create -f flannel.yml	
 }
 delete(){
 	kubectl delete clusterrole.rbac.authorization.k8s.io flannel -n kube-system
 	kubectl delete clusterrolebinding.rbac.authorization.k8s.io flannel -n kube-system
 	kubectl delete serviceaccount flannel -n kube-system
-	kubectl delete configmap kube-flannel-cfg -n kube-system
-	kubectl delete daemonset.extensions kube-flannel-ds -n kube-system
+	kubectl delete configmap kube-multus-cfg -n kube-system
+	kubectl delete daemonset.extensions kube-multus-ds -n kube-system
 }
 case $1 in
   create)
