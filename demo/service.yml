@@ -1,13 +1,13 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: iptables-service
   labels:
-    app: iptables
+    run: iptables
 spec:
   type: NodePort
   selector:
-    app: iptables
+    run: iptables
   ports:
     - protocol: TCP
       port: 80
