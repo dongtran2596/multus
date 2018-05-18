@@ -17,8 +17,7 @@ spec:
           securityContext:
             capabilities:
               add:
-                - NET_ADMIN
-                - NET_RAW
+                - NET_ADMIN                
           env:
           - name: TCP_PORTS
             value: "80,443"
