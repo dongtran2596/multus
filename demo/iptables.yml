@@ -14,25 +14,16 @@ spec:
           image: vimagick/iptables:latest
           command: ["/bin/sh"]
           args: ["/etc/iptables/rules.sh"]
-          volumeMounts:
-          - name: iptables-cfg
-            mountPath: /etc/iptables/
           ports:
           - containerPort: 80
           imagePullPolicy: Always
           securityContext:
             capabilities:
               add:
-                - NET_ADMIN                
-          env:
-          - name: TCP_PORTS
-            value: "80,443"
-          - name: UDP_PORTS
-            value: "53"
-          - name: RATE
-            value: "4mbit"
-          - name: BURST
-            value: "4kb"
+                - NET_ADMIN       
+          volumeMounts:
+          - name: iptables-cfg
+            mountPath: /etc/iptables/                
         volumes:
           - name: iptables-cfg
             configMap:
