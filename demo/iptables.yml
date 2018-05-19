@@ -23,7 +23,7 @@ spec:
                 - NET_ADMIN       
           volumeMounts:
           - name: iptables-cfg
-            mountPath: /etc/iptables/                
+            mountPath: /etc/iptables/               
         volumes:
           - name: iptables-cfg
             configMap:
