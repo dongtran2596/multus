@@ -12,13 +12,13 @@ spec:
       containers:
       - name: iptables
         image: vimagick/iptables:latest
+        command: ["/bin/sh"]
+        args: ["/etc/iptables/rules.sh"]
         ports:
         - containerPort: 80
         imagePullPolicy: Always
         securityContext:
-          capabilities:
-            add:
-            - NET_ADMIN       
+          privileged: true
         volumeMounts:
         - name: iptables-cfg
           mountPath: /etc/iptables/               
