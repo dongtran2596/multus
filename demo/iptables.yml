@@ -24,10 +24,10 @@ spec:
           volumeMounts:
           - name: iptables-cfg
             mountPath: /etc/iptables/               
-        volumes:
-          - name: iptables-cfg
-            configMap:
-              name: iptables-cfg
+      volumes:
+        - name: iptables-cfg
+          configMap:
+            name: iptables-cfg
 ---
 kind: ConfigMap
 apiVersion: v1
