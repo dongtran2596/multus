@@ -20,7 +20,7 @@ spec:
         securityContext:
           capabilities:
             add:
-              - NET_ADMIN       
+            - NET_ADMIN       
         volumeMounts:
         - name: iptables-cfg
           mountPath: /etc/iptables/               
