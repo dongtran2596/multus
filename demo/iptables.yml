@@ -10,24 +10,24 @@ spec:
         name: iptables
     spec:
       containers:
-        - name: iptables
-          image: vimagick/iptables:latest
-          command: ["/bin/sh"]
-          args: ["/etc/iptables/rules.sh"]
-          ports:
-          - containerPort: 80
-          imagePullPolicy: Always
-          securityContext:
-            capabilities:
-              add:
-                - NET_ADMIN       
-          volumeMounts:
-          - name: iptables-cfg
-            mountPath: /etc/iptables/               
-      volumes:
+      - name: iptables
+        image: vimagick/iptables:latest
+        command: ["/bin/sh"]
+        args: ["/etc/iptables/rules.sh"]
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN       
+        volumeMounts:
         - name: iptables-cfg
-          configMap:
-            name: iptables-cfg
+          mountPath: /etc/iptables/               
+      volumes:
+      - name: iptables-cfg
+        configMap:
+          name: iptables-cfg
 ---
 kind: ConfigMap
 apiVersion: v1
