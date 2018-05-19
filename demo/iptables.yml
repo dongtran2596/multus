@@ -12,8 +12,7 @@ spec:
       containers:
       - name: iptables
         image: vimagick/iptables:latest
-        command: ["/bin/sh"]
-        args: ["./etc/iptables/rules.sh"]
+        command: ["/bin/sh ./etc/iptables/rules.sh"]        
         ports:
         - containerPort: 80
         imagePullPolicy: Always
@@ -35,6 +34,7 @@ metadata:
     name: iptables
 data:
   rules.sh: |
+    #!/bin/sh
     iptables -F
     iptables -t nat -A PREROUTING -i eth0 -p tcp -m tcp --dport 80 -j DNAT --to-destination 192.168.122.202
     iptables -t nat -A POSTROUTING -o net0 -p tcp -m tcp --dport 80 -j SNAT --to-source 192.168.122.200
