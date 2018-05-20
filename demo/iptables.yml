@@ -15,7 +15,7 @@ spec:
         command:
         - /bin/echo
         args:
-        - Hello World
+        - HelloWorld
         ports:
         - containerPort: 80
         imagePullPolicy: Always
