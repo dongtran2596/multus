@@ -11,11 +11,7 @@ spec:
     spec:
       containers:
       - name: iptables
-        image: vimagick/iptables:latest
-        lifecycle:
-          postStart:
-            exec:
-              command: ["/etc/iptables/rules.sh"]
+        image: vimagick/iptables:latest       
         ports:
         - containerPort: 80
         imagePullPolicy: Always
