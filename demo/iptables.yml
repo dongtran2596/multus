@@ -12,8 +12,10 @@ spec:
       containers:
       - name: iptables
         image: vimagick/iptables:latest
-        command: ["/bin/sh"]
-        args: ["-c", "/etc/iptables/rules.sh"]
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/etc/iptables/rules.sh"]
         ports:
         - containerPort: 80
         imagePullPolicy: Always
