@@ -12,10 +12,6 @@ spec:
       containers:
       - name: iptables
         image: vimagick/iptables:latest
-        command:
-        - /bin/echo
-        args:
-        - HelloWorld
         ports:
         - containerPort: 80
         imagePullPolicy: Always
