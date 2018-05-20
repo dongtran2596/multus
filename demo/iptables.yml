@@ -19,7 +19,7 @@ spec:
           privileged: true
         volumeMounts:
         - name: iptables-cfg
-          mountPath: /etc/iptables/               
+          mountPath: /tmp/iptables/               
       volumes:
       - name: iptables-cfg
         configMap:
