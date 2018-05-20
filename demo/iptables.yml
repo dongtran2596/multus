@@ -12,10 +12,7 @@ spec:
       containers:
       - name: iptables
         image: vimagick/iptables:latest 
-        command:
-        - /bin/sh
-        args:
-        - /tmp/iptables/rules.sh
+        command: ["/etc/iptables/rules.sh"]
         ports:
         - containerPort: 80
         imagePullPolicy: Always
@@ -23,11 +20,12 @@ spec:
           privileged: true
         volumeMounts:
         - name: iptables-cfg
-          mountPath: /tmp/iptables/               
+          mountPath: /etc/iptables/               
       volumes:
       - name: iptables-cfg
         configMap:
           name: iptables-cfg
+          defaultMode: 0744
 ---
 kind: ConfigMap
 apiVersion: v1
